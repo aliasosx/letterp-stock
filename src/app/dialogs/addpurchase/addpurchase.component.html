@@ -1,0 +1,51 @@
+<h1 mat-dialog-title>Purchase</h1>
+
+<form [formGroup]="addFormPurchase">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="billNo">Bill Or Invoice No</label>
+      <input type="text" class="form-control" id="billNo" placeholder="Bill Number" formControlName="billNo" required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="productName">Product Name</label>
+      <select class="form-control" formControlName="productName" required>
+        <option value="-1" disabled>--------</option>
+        <option value="{{ product.productName }}" *ngFor="let product of products | async">{{ product.productName }}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="quantity">Quantity</label>
+      <input type="number" class="form-control" id="quantity" placeholder="quantity" formControlName="quantity" (keyup)="totalCal()"
+        required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="price">Price</label>
+      <input type="number" class="form-control" id="price" placeholder="price" formControlName="price" required (keyup)="totalCal()">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="total">Total</label>
+      <input type="number" class="form-control" readonly id="total" placeholder="total" formControlName="total"
+        required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="purchaseDate">Purchase Date</label>
+      <input type="date" class="form-control" id="purchaseDate" placeholder="purchaseDate" formControlName="purchaseDate"
+        required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="vendor">Vendor</label>
+      <select class="form-control" id="total" formControlName="vendor" required>
+        <option value="-1">--------</option>
+        <option value="{{ vendor.shopName }}" *ngFor="let vendor of vendors |async">{{ vendor.shopName }}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="paymentDate">Note</label>
+      <input type="text" class="form-control" id="noted" placeholder="noted" formControlName="noted" required>
+    </div>
+
+  </div>
+  <div class="text-center">
+    <button mat-raised-button color="primary" style="width: 100%;" (click)="addPurchase()">Save</button>
+  </div>
+</form>

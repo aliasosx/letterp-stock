@@ -1,0 +1,14 @@
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'phetsarath-ot';
+}
+.spaceDiv {
+  margin-left: 5px;
+}
+.table {
+  border-radius: 2px;
+}
+.floatButton{
+  position: absolute;
+  top: 12px;
+  right: 15px;
+}

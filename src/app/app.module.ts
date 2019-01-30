@@ -18,6 +18,8 @@ import { ProductsComponent } from './pages/products/products.component';
 import { PurchasesComponent } from './pages/purchases/purchases.component';
 import { AddProductsComponent } from './dialogs/add-products/add-products.component';
 import { ViewProductsComponent } from './dialogs/view-products/view-products.component';
+import { AddpurchaseComponent } from './dialogs/addpurchase/addpurchase.component';
+import { ViewaddpurchaseComponent } from './dialogs/viewaddpurchase/viewaddpurchase.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { ViewProductsComponent } from './dialogs/view-products/view-products.com
     ProductsComponent,
     PurchasesComponent,
     AddProductsComponent,
-    ViewProductsComponent
+    ViewProductsComponent,
+    AddpurchaseComponent,
+    ViewaddpurchaseComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,9 @@ import { ViewProductsComponent } from './dialogs/view-products/view-products.com
   entryComponents:
     [
       AddProductsComponent,
-      ViewProductsComponent
+      ViewProductsComponent,
+      AddpurchaseComponent,
+      ViewaddpurchaseComponent,
     ]
   ,
   providers: [{ provide: FirestoreSettingsToken, useValue: {} }],

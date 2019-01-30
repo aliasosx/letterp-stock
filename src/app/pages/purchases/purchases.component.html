@@ -1,3 +1,42 @@
-<p>
-  purchases works!
-</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Purchase Management</mat-card-title>
+    <button mat-stroked-button color="primary" class="floatButton" (click)="addPurchase()">add new Purchase</button>
+  </mat-card-header>
+  <mat-card-content>
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" class="text-left">Transaction ID</th>
+          <th scope="col" class="text-left">Bill No</th>
+          <th scope="col" class="text-left">Product Name</th>
+          <th scope="col" class="text-right">Quantity</th>
+          <th scope="col" class="text-right">Price</th>
+          <th scope="col" class="text-right">Total</th>
+          <th scope="col" class="text-center">Date</th>
+          <th scope="col" class="text-left">Vendor</th>
+          <th scope="col" class="text-center">Payer</th>
+          <th scope="col" class="text-left">Noted</th>
+          <th scope="col" class="text-center">Manage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let purchase of purchases | async">
+          <td class="text-left" (click)="updatePurchase(purchase)">{{ purchase.id }}</td>
+          <td class="text-left" (click)="updatePurchase(purchase)">{{ purchase.billNo.trim() }}</td>
+          <td class="text-left" (click)="updatePurchase(purchase)">{{ purchase.productName.trim() }}</td>
+          <td class="text-right">{{ purchase.quantity |number}}</td>
+          <td class="text-right">{{ purchase.price |number}}</td>
+          <td class="text-right">{{ purchase.total |number }}</td>
+          <td class="text-center">{{ purchase.purchaseDate | date }}</td>
+          <td class="text-left">{{ purchase.vendor }}</td>
+          <td class="text-center">{{ purchase.userName }}</td>
+          <td class="text-left">{{ purchase.noted }}</td>
+          <td class="text-center"><button mat-raised-button color="warn" (click)="deletePurchase(purchase)">Delete</button><span
+              class="spaceDiv"></span><button mat-raised-button color="primary" (click)="updatePurchase(purchase)">Update</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </mat-card-content>
+</mat-card>
