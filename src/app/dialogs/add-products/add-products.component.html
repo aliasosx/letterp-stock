@@ -1,0 +1,57 @@
+<h1 mat-dialog-title>ເພີ່ມສິນຄ້າ</h1>
+<div class="alert alert-danger" role="alert" [ngClass]="showAlert">
+  Code already taken
+</div>
+<form [formGroup]="addProductForm">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="barcodetxt">Barcode</label>
+      <input type="text" class="form-control" id="barcodetxt" placeholder="Barcode" formControlName="barcode" required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="productCode">Product code</label>
+      <input type="text" class="form-control" id="productCode" placeholder="Product code" formControlName="productCode"
+        (keyup)="checkProductCode($event.target.value)" required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="productName">Product Name</label>
+      <input type="text" class="form-control" id="productName" placeholder="Product Name" formControlName="productName"
+        required>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="productTypeCode">Product Types</label>
+      <select class="form-control" formControlName="productTypeCode" required>
+        <option value="-1" disabled>------</option>
+        <option *ngFor="let productType of productTypes | async" value="{{ productType.productTypeCode }}">{{
+          productType.productTypeCode }}</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="cost">Cost</label>
+      <input type="number" class="form-control" id="cost" placeholder="Cost" formControlName="cost" required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="cost">Minimum Quantity</label>
+      <input type="number" class="form-control" id="minimumQuantity" placeholder="Minimum Quantity" formControlName="minimumQuantity"
+        required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="currentQuantity">Current Quantity</label>
+      <input type="number" class="form-control" id="currentQuantity" placeholder="Current Quantity" formControlName="currentQuantity"
+        required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="currentQuantity">Vendor</label>
+      <select class="form-control" formControlName="vendorId" required>
+        <option value="-1" disabled>------</option>
+        <option *ngFor="let vendor of vendors | async" value="{{ vendor.shopName }}">{{ vendor.shopName }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="text-center">
+    <button mat-raised-button color="primary" style="width: 100%;" (click)="addProduct()">Save</button>
+  </div>
+
+</form>
