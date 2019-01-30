@@ -7,6 +7,7 @@ export interface Product {
   vendorId: number;
   minimumQuantity: number;
   currentQuantity: number;
+  unit: string;
   productTypeCode: string;
   foodId?: number;
   userId: number;

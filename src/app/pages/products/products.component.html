@@ -11,31 +11,35 @@
 </mat-card>
 <mat-card>
   <table class="table table-bordered">
-    <thead class="thead-dark">
+    <thead class="thead-light">
       <tr>
         <th scope="col" class="text-center">Code</th>
+        <th scope="col" class="text-center">Barcode</th>
         <th scope="col" class="text-center">Product Code</th>
         <th scope="col" class="text-center">Product name</th>
         <th scope="col" class="text-center">Product Type</th>
         <th scope="col" class="text-center">Cost</th>
         <th scope="col" class="text-center">Minimum</th>
         <th scope="col" class="text-center">Current</th>
+        <th scope="col" class="text-center">Unit</th>
         <th scope="col" class="text-center">Vendor</th>
-        <th scope="col" class="text-center">Create At</th>
+        <th scope="col" class="text-center">Create On</th>
         <th scope="col" class="text-center">Manage</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let product of products | async">
-        <td class="text-left" (click)="updateProduct(product)" style="cursor: pointer">{{ product.id }}</td>
+        <td class="text-left" (click)="updateProduct(product)" style="cursor: pointer">{{ product.id.trim() }}</td>
+        <td class="text-left">{{ product.barcode }}</td>
         <td class="text-left">{{ product.productCode }}</td>
         <td class="text-left">{{ product.productName }}</td>
-        <td class="text-center">{{ product.productTypeCode }}</td>
-        <td class="text-center">{{ product.cost |number }}</td>
+        <td class="text-left">{{ product.productTypeCode }}</td>
+        <td class="text-right">{{ product.cost |number }}</td>
         <td class="text-center">{{ product.minimumQuantity |number }}</td>
         <td class="text-center">{{ product.currentQuantity |number }}</td>
+        <td class="text-center">{{ product.unit }}</td>
         <td class="text-center">{{ product.vendorId }}</td>
-        <td class="text-center">{{ product.createdAt }}</td>
+        <td class="text-center">{{ product.createdAt.toDate() |date }}</td>
         <td class="text-center"><button mat-raised-button color="warn" (click)="deleteProduct(product)">Delete</button><span
             class="spaceDiv"></span><button mat-raised-button color="primary" (click)="updateProduct(product)">Update</button></td>
       </tr>
