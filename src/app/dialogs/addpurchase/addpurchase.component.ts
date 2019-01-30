@@ -6,6 +6,8 @@ import { Purchase } from 'src/app/interfaces/purchase';
 import { Observable } from 'rxjs';
 import { Vendor } from 'src/app/interfaces/vendor';
 import { Product } from 'src/app/interfaces/product';
+import { StockHistory } from 'src/app/interfaces/stock_history';
+import { element } from '@angular/core/src/render3';
 declare var swal: any;
 
 @Component({
@@ -19,6 +21,7 @@ export class AddpurchaseComponent implements OnInit {
     this.purchasesRef = db.collection<Purchase>('purchases');
     this.vendorsRef = db.collection<Vendor>('vendors');
     this.productsRef = db.collection<Product>('products');
+    this.stockHistoriesRef = db.collection<StockHistory>('stockHistories');
   }
 
   addFormPurchase: FormGroup;
@@ -33,6 +36,13 @@ export class AddpurchaseComponent implements OnInit {
   products: Observable<any[]>;
   productsRef: AngularFirestoreCollection<Product>;
   productsDoc: AngularFirestoreDocument<Product>;
+
+  stockHistoriesRef: AngularFirestoreCollection<StockHistory>;
+  stockHistoriesDoc: AngularFirestoreDocument<StockHistory>;
+  stockHistories: Observable<any[]>;
+
+
+
 
   ngOnInit() {
     this.addFormPurchase = new FormGroup({
@@ -53,7 +63,6 @@ export class AddpurchaseComponent implements OnInit {
   addPurchase() {
     if (this.addFormPurchase.valid) {
       this.purchasesRef.add(this.addFormPurchase.value).then(res => {
-        console.log(res);
         if (res) {
           this.DialogRef.close('success');
         } else {
@@ -69,5 +78,11 @@ export class AddpurchaseComponent implements OnInit {
   totalCal() {
     this.addFormPurchase.get('total').setValue(parseInt(this.addFormPurchase.get('quantity').value) * parseInt(this.addFormPurchase.get('price').value));
   }
-
+  testQuery() {
+    this.db.collection('products', ref => ref.where('cost', '==', '18000')).get().toPromise().then(resp => {
+      resp.docs.forEach(doc => {
+        console.log(doc.data());
+      });
+    })
+  }
 }

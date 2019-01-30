@@ -60,5 +60,4 @@ export class ViewaddpurchaseComponent implements OnInit {
     this.addFormPurchase.get('total').setValue(parseInt(this.addFormPurchase.get('quantity').value) * parseInt(this.addFormPurchase.get('price').value));
   }
 
-
 }
