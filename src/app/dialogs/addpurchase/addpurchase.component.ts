@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { Vendor } from 'src/app/interfaces/vendor';
 import { Product } from 'src/app/interfaces/product';
 import { StockHistory } from 'src/app/interfaces/stock_history';
-import { element } from '@angular/core/src/render3';
 declare var swal: any;
 
 @Component({
@@ -78,11 +77,14 @@ export class AddpurchaseComponent implements OnInit {
   totalCal() {
     this.addFormPurchase.get('total').setValue(parseInt(this.addFormPurchase.get('quantity').value) * parseInt(this.addFormPurchase.get('price').value));
   }
+
+  productsNote: Observable<Product[]>;
+  productNotesCollect: AngularFirestoreCollection<Product>;
+
   testQuery() {
-    this.db.collection('products', ref => ref.where('cost', '==', '18000')).get().toPromise().then(resp => {
-      resp.docs.forEach(doc => {
-        console.log(doc.data());
-      });
-    })
+    this.productNotesCollect = this.db.collection('products', ref => {
+      return ref.where('cost', '>=', 10000);
+    });
+    this.productsNote = this.productNotesCollect.valueChanges();
   }
 }

@@ -1,4 +1,9 @@
 <h1 mat-dialog-title>Purchase</h1>
+<ul>
+  <li *ngFor="let note of productsNote |async">
+    {{ note.cost }}
+  </li>
+</ul>
 
 <form [formGroup]="addFormPurchase">
   <div class="form-row">
@@ -41,14 +46,15 @@
     </div>
     <div class="form-group col-md-6">
       <label for="paymentDate">Note</label>
-      <input type="text" class="form-control" id="noted" placeholder="noted" formControlName="noted" required>
+      <input type="text" class="form-control" id="noted" placeholder="noted" formControlName="noted">
     </div>
 
   </div>
   <div class="text-center">
     <button mat-raised-button color="primary" style="width: 100%;" (click)="addPurchase()">Save</button>
   </div>
+  <p></p>
   <div class="text-center">
-    <button mat-raised-button color="primary" style="width: 100%;" (click)="testQuery()">Test</button>
+    <button mat-raised-button color="warn" style="width: 100%;" (click)="testQuery()">Test</button>
   </div>
 </form>

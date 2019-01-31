@@ -37,7 +37,7 @@ import { ViewaddpurchaseComponent } from './dialogs/viewaddpurchase/viewaddpurch
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     BrowserAnimationsModule,
     MatButtonModule, MatCheckboxModule,
     MatToolbarModule, MatMenuModule, MatIconModule, MatCardModule, MatDialogModule, MatDividerModule,
