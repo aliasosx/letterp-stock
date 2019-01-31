@@ -16,18 +16,18 @@
     <table class="table table-bordered product_detail">
       <thead class="thead-light">
         <tr>
-          <th scope="col" class="text-center">Code</th>
-          <th scope="col" class="text-center">Barcode</th>
-          <th scope="col" class="text-center">Product Code</th>
-          <th scope="col" class="text-center">Product name</th>
-          <th scope="col" class="text-center">Product Type</th>
-          <th scope="col" class="text-center">Cost</th>
-          <th scope="col" class="text-center">Minimum</th>
-          <th scope="col" class="text-center">Current</th>
-          <th scope="col" class="text-center">Unit</th>
-          <th scope="col" class="text-center">Vendor</th>
-          <th scope="col" class="text-center">Create On</th>
-          <th scope="col" class="text-center">Manage</th>
+          <th scope="col" class="text-center">ລະຫັດ</th>
+          <th scope="col" class="text-center">ລະຫັດບາໂຄດ</th>
+          <th scope="col" class="text-center">ລະຫັດສິນຄ້າ</th>
+          <th scope="col" class="text-center">ຊື່ສິນຄ້າ</th>
+          <th scope="col" class="text-center">ປະເພດ</th>
+          <th scope="col" class="text-center">ຕົ້ນທຶນ</th>
+          <th scope="col" class="text-center">ຍອດຕໍ່າສຸດ</th>
+          <th scope="col" class="text-center">ຍອດປະຈຸບັນ</th>
+          <th scope="col" class="text-center">ຫົວໜ່ວຍ</th>
+          <th scope="col" class="text-center">ຜູ້ສະໜອງ</th>
+          <th scope="col" class="text-center">ເຂົ້າສາງວັນທີ</th>
+          <th scope="col" class="text-center">ຈັດການ</th>
         </tr>
       </thead>
       <tbody>
@@ -40,7 +40,7 @@
           <td class="text-right">{{ product.cost |number }}</td>
           <td class="text-center">{{ product.minimumQuantity |number }}</td>
           <td class="text-center">{{ product.currentQuantity |number }}</td>
-          <td class="text-center">{{ product.unit }}</td>
+          <td class="text-left">{{ product.unit }}</td>
           <td class="text-center">{{ product.vendorId }}</td>
           <td class="text-center">{{ product.createdAt.toDate() |date }}</td>
           <td class="text-center"><button mat-raised-button color="warn" (click)="deleteProduct(product)">Delete</button><span

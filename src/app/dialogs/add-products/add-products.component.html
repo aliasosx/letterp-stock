@@ -43,6 +43,13 @@
         required>
     </div>
     <div class="form-group col-md-6">
+      <label for="currentQuantity">Unit</label>
+      <select class="form-control" formControlName="unit" required>
+        <option value="-1" disabled>------</option>
+        <option *ngFor="let unit of units | async" value="{{ unit.unit }}">{{ unit.unitName }}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
       <label for="currentQuantity">Vendor</label>
       <select class="form-control" formControlName="vendorId" required>
         <option value="-1" disabled>------</option>

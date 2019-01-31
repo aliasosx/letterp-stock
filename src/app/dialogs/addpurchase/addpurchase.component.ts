@@ -8,6 +8,8 @@ import { Vendor } from 'src/app/interfaces/vendor';
 import { Product } from 'src/app/interfaces/product';
 import { StockHistory } from 'src/app/interfaces/stockHistory';
 import { StocksServiceService } from 'src/app/services/stocks-service.service';
+import { FirebaseStorage } from 'angularfire2';
+import { AngularFireStorage } from 'angularfire2/storage';
 declare var swal: any;
 
 @Component({
@@ -16,14 +18,12 @@ declare var swal: any;
   styleUrls: ['./addpurchase.component.css']
 })
 export class AddpurchaseComponent implements OnInit {
-
-  constructor(private db: AngularFirestore, private DialogRef: MatDialogRef<AddpurchaseComponent>, private stockService: StocksServiceService) {
+  constructor(private db: AngularFirestore, private DialogRef: MatDialogRef<AddpurchaseComponent>, private stockService: StocksServiceService, private storage: AngularFireStorage) {
     this.purchasesRef = db.collection<Purchase>('purchases');
     this.vendorsRef = db.collection<Vendor>('vendors');
     this.productsRef = db.collection<Product>('products');
     this.stockHistoriesRef = db.collection<StockHistory>('stockHistories');
   }
-
   addFormPurchase: FormGroup;
   purchasesRef: AngularFirestoreCollection<Purchase>;
   purchasesDoc: AngularFirestoreDocument<Purchase>;
@@ -41,6 +41,8 @@ export class AddpurchaseComponent implements OnInit {
   stockHistoriesDoc: AngularFirestoreDocument<StockHistory>;
   stockHistories: Observable<any[]>;
 
+  file: File;
+
   ngOnInit() {
     this.addFormPurchase = new FormGroup({
       billNo: new FormControl(),
@@ -52,6 +54,7 @@ export class AddpurchaseComponent implements OnInit {
       vendor: new FormControl(),
       userName: new FormControl(),
       noted: new FormControl(),
+      bills: new FormControl(),
     });
     this.vendors = this.db.collection('vendors').valueChanges();
     this.products = this.db.collection('products').valueChanges();
@@ -62,22 +65,20 @@ export class AddpurchaseComponent implements OnInit {
 
   addPurchase() {
     if (this.addFormPurchase.valid) {
+      this.addFormPurchase.get('userName').setValue('Administrator');
       this.purchasesRef.add(this.addFormPurchase.value).then(res => {
         if (res) {
-          //this.updateStock()
-          //this.DialogRef.close('success');
-
           this.productForUpdateCollect = this.db.collection('products', ref => {
             return ref.where('productName', '==', this.addFormPurchase.get('productName').value);
           });
           this.productForUpdateCollect.get().subscribe(products => {
             products.docs.forEach(product => {
-              this.updateStock(product.data(), res.id);
+              this.updateStock(product.data(), res);
             });
           });
 
         } else {
-          swal('something went wrong!', 'Please correct data info', 'error');
+          //swal('something went wrong!', 'Please correct data info', 'error');
           return
         }
       });
@@ -89,7 +90,25 @@ export class AddpurchaseComponent implements OnInit {
   totalCal() {
     this.addFormPurchase.get('total').setValue(parseInt(this.addFormPurchase.get('quantity').value) * parseInt(this.addFormPurchase.get('price').value));
   }
+  progressBarValue;
+  uploadBills(event) {
+    let selectedFiles: FileList;
+    selectedFiles = event;
+    if (selectedFiles.item(0)) {
+      let file = selectedFiles.item(0);
+      let uniqkey = 'pic' + Math.floor(Math.random() * 1000000);
+      const uploadTask = this.storage.upload('/bills/' + uniqkey, file);
 
+      uploadTask.percentageChanges().subscribe((value) => {
+        this.progressBarValue = value.toFixed(2);
+      });
+      uploadTask.then((snapshot: firebase.storage.UploadTaskSnapshot) => {
+        snapshot.ref.getDownloadURL().then(url => {
+          console.log(url); // Image url
+        })
+      });
+    }
+  }
   productsNote: Observable<Product[]>;
   productNotesCollect: AngularFirestoreCollection<Product>;
 
@@ -108,7 +127,7 @@ export class AddpurchaseComponent implements OnInit {
       console.log(resp);
     });
   }
-  updateStock(product, purchaseId) {
+  updateStock(product, purchase) {
     console.log(product);
     const stockhist = {
       productName: product.productName,
@@ -117,7 +136,7 @@ export class AddpurchaseComponent implements OnInit {
       currentQuantity: (parseInt(this.addFormPurchase.get('quantity').value) + parseInt(product.currentQuantity)),
       updateDate: new Date(),
       updateSource: 'Purchase',
-      purchaseDetailId: purchaseId,
+      purchaseDetailId: purchase,
       createdAt: new Date(),
     }
     this.db.collection('stockHistories').add(stockhist).then((resp) => {

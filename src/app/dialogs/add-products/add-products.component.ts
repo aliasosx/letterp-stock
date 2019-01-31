@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { ProductType } from 'src/app/interfaces/productType';
 import { Product } from 'src/app/interfaces/product';
 import * as uuid from 'uuid';
+import { Unit } from 'src/app/interfaces/unit';
 
 @Component({
   selector: 'app-add-products',
@@ -19,6 +20,7 @@ export class AddProductsComponent implements OnInit {
     this.vendorsRef = this.db.collection<Vendor>('vendors');
     this.productTypesRef = this.db.collection<ProductType>('productTypes');
     this.productsRef = this.db.collection<Product>('products');
+    this.unitsRef = this.db.collection<Unit>('units');
   }
   showAlert = "hidden";
   addProductForm: FormGroup;
@@ -36,6 +38,10 @@ export class AddProductsComponent implements OnInit {
   productsRef: AngularFirestoreCollection<Product>;
   productDoc: AngularFirestoreDocument<Product>;
 
+  unitsRef: AngularFirestoreCollection<Unit>
+  unitsDoc: AngularFirestoreDocument<Unit>
+  units: Observable<any[]>;
+
   ngOnInit() {
     let uid = uuid.v4();
     this.addProductForm = new FormGroup({
@@ -50,11 +56,14 @@ export class AddProductsComponent implements OnInit {
       userId: new FormControl(),
       vendorId: new FormControl(),
       createdAt: new FormControl(new Date()),
-      updatedAt: new FormControl(new Date())
+      updatedAt: new FormControl(new Date()),
+      unit: new FormControl(),
     });
     this.vendors = this.db.collection('vendors').valueChanges();
     this.productTypes = this.db.collection('productTypes').valueChanges();
+    this.units = this.unitsRef.valueChanges();
     this.addProductForm.get('userId').setValue(18);
+
   }
 
   addProduct() {

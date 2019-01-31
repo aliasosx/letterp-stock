@@ -8,4 +8,5 @@ export interface Purchase {
   vendor: string;
   userName: string;
   noted: string;
+  bills: string;
 }
