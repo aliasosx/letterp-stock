@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Vendor } from 'src/app/interfaces/vendor';
 import { Product } from 'src/app/interfaces/product';
 import { StockHistory } from 'src/app/interfaces/stockHistory';
+import { StocksServiceService } from 'src/app/services/stocks-service.service';
 declare var swal: any;
 
 @Component({
@@ -16,7 +17,7 @@ declare var swal: any;
 })
 export class AddpurchaseComponent implements OnInit {
 
-  constructor(private db: AngularFirestore, private DialogRef: MatDialogRef<AddpurchaseComponent>) {
+  constructor(private db: AngularFirestore, private DialogRef: MatDialogRef<AddpurchaseComponent>, private stockService: StocksServiceService) {
     this.purchasesRef = db.collection<Purchase>('purchases');
     this.vendorsRef = db.collection<Vendor>('vendors');
     this.productsRef = db.collection<Product>('products');
@@ -92,7 +93,8 @@ export class AddpurchaseComponent implements OnInit {
   productsNote: Observable<Product[]>;
   productNotesCollect: AngularFirestoreCollection<Product>;
 
-  testQuery() {
+  async testQuery() {
+    /*
     this.productNotesCollect = this.db.collection('products', ref => {
       return ref.where('cost', '>=', 10000);
     });
@@ -100,6 +102,10 @@ export class AddpurchaseComponent implements OnInit {
       p.docs.forEach(o => {
         this.updateStock(o.data(), '1111111');
       });
+    });
+    */
+    const c = await this.stockService.getLatestQuantityByProductName(this.addFormPurchase.get('productName')).then(resp => {
+      console.log(resp);
     });
   }
   updateStock(product, purchaseId) {
