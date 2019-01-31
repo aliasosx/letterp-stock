@@ -1,12 +1,12 @@
+import { MatDialogRef } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Purchase } from 'src/app/interfaces/purchase';
 import { Observable } from 'rxjs';
 import { Vendor } from 'src/app/interfaces/vendor';
 import { Product } from 'src/app/interfaces/product';
-import { StockHistory } from 'src/app/interfaces/stock_history';
+import { StockHistory } from 'src/app/interfaces/stockHistory';
 declare var swal: any;
 
 @Component({
@@ -40,9 +40,6 @@ export class AddpurchaseComponent implements OnInit {
   stockHistoriesDoc: AngularFirestoreDocument<StockHistory>;
   stockHistories: Observable<any[]>;
 
-
-
-
   ngOnInit() {
     this.addFormPurchase = new FormGroup({
       billNo: new FormControl(),
@@ -59,11 +56,25 @@ export class AddpurchaseComponent implements OnInit {
     this.products = this.db.collection('products').valueChanges();
   }
 
+  productsForUpdate: Observable<Product[]>;
+  productForUpdateCollect: AngularFirestoreCollection<Product>;
+
   addPurchase() {
     if (this.addFormPurchase.valid) {
       this.purchasesRef.add(this.addFormPurchase.value).then(res => {
         if (res) {
-          this.DialogRef.close('success');
+          //this.updateStock()
+          //this.DialogRef.close('success');
+
+          this.productForUpdateCollect = this.db.collection('products', ref => {
+            return ref.where('productName', '==', this.addFormPurchase.get('productName').value);
+          });
+          this.productForUpdateCollect.get().subscribe(products => {
+            products.docs.forEach(product => {
+              this.updateStock(product.data(), res.id);
+            });
+          });
+
         } else {
           swal('something went wrong!', 'Please correct data info', 'error');
           return
@@ -85,6 +96,34 @@ export class AddpurchaseComponent implements OnInit {
     this.productNotesCollect = this.db.collection('products', ref => {
       return ref.where('cost', '>=', 10000);
     });
-    this.productsNote = this.productNotesCollect.valueChanges();
+    this.productNotesCollect.get().subscribe(p => {
+      p.docs.forEach(o => {
+        this.updateStock(o.data(), '1111111');
+      });
+    });
+  }
+  updateStock(product, purchaseId) {
+    console.log(product);
+    const stockhist = {
+      productName: product.productName,
+      beforeQuantity: product.currentQuantity,
+      stockChange: parseInt(this.addFormPurchase.get('quantity').value),
+      currentQuantity: (parseInt(this.addFormPurchase.get('quantity').value) + parseInt(product.currentQuantity)),
+      updateDate: new Date(),
+      updateSource: 'Purchase',
+      purchaseDetailId: purchaseId,
+      createdAt: new Date(),
+    }
+    this.db.collection('stockHistories').add(stockhist).then((resp) => {
+      //console.log(resp.id);
+      this.updateCurrentStock(product, stockhist.currentQuantity);
+    });
+  }
+  updateCurrentStock(product, CurrentQuantity) {
+    const _product: Product = product;
+    _product.currentQuantity = CurrentQuantity;
+    this.db.collection('products').doc(product.id).update(_product).then((resp) => {
+      this.DialogRef.close('success');
+    });
   }
 }

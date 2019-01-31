@@ -20,6 +20,7 @@ import { AddProductsComponent } from './dialogs/add-products/add-products.compon
 import { ViewProductsComponent } from './dialogs/view-products/view-products.component';
 import { AddpurchaseComponent } from './dialogs/addpurchase/addpurchase.component';
 import { ViewaddpurchaseComponent } from './dialogs/viewaddpurchase/viewaddpurchase.component';
+import { BillOfMaterialsComponent } from './pages/bill-of-materials/bill-of-materials.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ViewaddpurchaseComponent } from './dialogs/viewaddpurchase/viewaddpurch
     AddProductsComponent,
     ViewProductsComponent,
     AddpurchaseComponent,
-    ViewaddpurchaseComponent
+    ViewaddpurchaseComponent,
+    BillOfMaterialsComponent
   ],
   imports: [
     BrowserModule,

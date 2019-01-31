@@ -18,13 +18,13 @@ export class ProductsComponent implements OnInit {
     this.productsRef = db.collection<Product>('products');
   }
 
+  title: string = 'Products';
   productsRef: AngularFirestoreCollection<Product>;
   private productDoc: AngularFirestoreDocument<Product>;
   product: Product;
   products: Observable<any[]>;
   ngOnInit() {
     //this.products = this.db.collection('products').valueChanges();
-
     this.products = this.db.collection('products').snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Product;
@@ -32,9 +32,7 @@ export class ProductsComponent implements OnInit {
         return data;
       });
     }));
-    this.products.subscribe(res => {
-      console.log(res);
-    })
+
   }
 
   openAddNewDialog() {
