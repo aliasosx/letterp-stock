@@ -32,7 +32,6 @@ export class ProductsComponent implements OnInit {
         return data;
       });
     }));
-
   }
 
   openAddNewDialog() {
