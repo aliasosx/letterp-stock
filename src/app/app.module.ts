@@ -26,6 +26,8 @@ import { ViewaddpurchaseComponent } from './dialogs/viewaddpurchase/viewaddpurch
 import { BillOfMaterialsComponent } from './pages/bill-of-materials/bill-of-materials.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { VendorsComponent } from './dialogs/vendors/vendors.component';
+import { FoodsComponent } from './pages/foods/foods.component';
+import { AddFoodComponent } from './dialogs/add-food/add-food.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { VendorsComponent } from './dialogs/vendors/vendors.component';
     ViewaddpurchaseComponent,
     BillOfMaterialsComponent,
     SettingsComponent,
-    VendorsComponent
+    VendorsComponent,
+    FoodsComponent,
+    AddFoodComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +65,7 @@ import { VendorsComponent } from './dialogs/vendors/vendors.component';
       AddpurchaseComponent,
       ViewaddpurchaseComponent,
       VendorsComponent,
+      AddFoodComponent,
     ]
   ,
   providers: [{ provide: FirestoreSettingsToken, useValue: {} }],

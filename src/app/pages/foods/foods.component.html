@@ -1,0 +1,45 @@
+<mat-card>
+  <mat-card-header>
+    <mat-icon class="icon-header">fastfood</mat-icon>
+    <h1 mat-dialog-title>Foods </h1>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row">
+      <div class="col col-md-10">
+        <input type="text" class="form-control" style="width: 100%" placeholder="Search">
+      </div>
+      <div class="col col-md-2 text-right">
+        <button mat-raised-button color="primary" style="width: 100%;" (click)="openAddNewDialog()">Add new</button>
+      </div>
+    </div>
+    <table class="table table-bordered product_detail">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" class="text-center" style="width: 30px;">ລະຫັດ</th>
+          <th scope="col" class="text-left">ຊື່ອາຫານ</th>
+          <th scope="col" class="text-center">ຊື່ອາຫານພາສາອັງກິດ</th>
+          <th scope="col" class="text-center">ຕົ້ນທຶນ</th>
+          <th scope="col" class="text-center">ລາຄາຂາຍ</th>
+          <th scope="col" class="text-center">ສະກຸນເງິນ</th>
+          <th scope="col" class="text-center">ຈັດການ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let food of foods | async">
+          <td class="text-center">{{ food.foodId }}</td>
+          <td class="text-left">{{ food.food_name }}</td>
+          <td class="text-left">{{ food.food_name_en }}</td>
+          <td class="text-center">{{ food.cost |number }}</td>
+          <td class="text-center">{{ food.price |number }}</td>
+          <td class="text-center">{{ food.currency }}</td>
+          <td class="text-center"><button mat-raised-button (click)="deleteFood(food.id)" color="warn">Delete</button><span
+              class="spaceDiv"></span><button mat-raised-button disabled color="primary">Update</button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot class="thead-light">
+
+      </tfoot>
+    </table>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,9 @@
+.photoDiv {
+  position: relative;
+  max-width: 240px;
+  margin-top: 25px;
+  border-radius: 5px;
+}
+.hidden {
+  display: none;
+}

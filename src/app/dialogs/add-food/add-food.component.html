@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>ເພີ່ມອາຫານ</h1>
+<div class="alert alert-danger" role="alert" [ngClass]="showAlert">
+  Please correct all detail before save
+</div>
+<form [formGroup]="addFoodForm">
+  <div class="row">
+    <div class="col col-md-4">
+      <img [src]="photoSrc" (click)="fileinput.click()" class="photoDiv shadow p-3 mb-5 bg-white">
+      <input type="file" (change)="uploadPhoto($event.target.files)" #fileinput style="display: none;">
+      <mat-progress-bar color="primary" mode="determinate" [value]="progressBarValue">
+      </mat-progress-bar>
+    </div>
+    <div class="col col-md-8">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="foodId">FoodId</label>
+          <input type="number" class="form-control" id="foodId" formControlName="foodId" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="food_name">Food name</label>
+          <input type="text" class="form-control" id="food_name" formControlName="food_name" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="food_name_en">Food name english</label>
+          <input type="text" class="form-control" id="food_name_en" formControlName="food_name_en" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="cost">Cost</label>
+          <input type="number" class="form-control" id="cost" formControlName="cost" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="price">Price</label>
+          <input type="number" class="form-control" id="price" formControlName="price" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="currency">Currency</label>
+          <select class="form-control" id="currency" required formControlName="currency">
+            <option value="" disabled>-----------</option>
+            <option *ngFor="let c of currencies |async" value="{{ c.currencyName }}">{{ c.currencyName }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-6">
+          <button mat-raised-button color="primary" (click)="createFood()" style="width: 100%;">Save</button>
+        </div>
+        <div class="col col-md-6">
+          <button mat-raised-button color="warn" style="width: 100%;">Cancel</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>
