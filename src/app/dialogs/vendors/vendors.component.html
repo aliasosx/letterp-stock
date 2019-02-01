@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>ຜູ້ສະໜອງ</h1>
+<div class="row">
+  <table class="table table-bordered">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col" class="text-center">ລະຫັດຜຸ້ສະໜອງ</th>
+        <th scope="col" class="text-center">ຊື່ຮ້ານ</th>
+        <th scope="col" class="text-center">ຜູ້ຮັບຜິດຊອບ</th>
+        <th scope="col" class="text-center">ຕິດຕໍ່</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vendor of vendors | async">
+        <td class="text-center">{{ vendor.vendorId }}</td>
+        <td class="text-left">{{ vendor.shopName }}</td>
+        <td class="text-left">{{ vendor.contact }}</td>
+        <td class="text-left">{{ vendor.tel }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

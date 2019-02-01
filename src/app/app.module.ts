@@ -11,7 +11,8 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 
 import {
   MatButtonModule, MatCheckboxModule, MatToolbarModule, MatMenuModule, MatIconModule, MatCardModule, MatDialogModule, MatDividerModule, MatProgressBarModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatTabsModule
 } from '@angular/material';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +25,7 @@ import { AddpurchaseComponent } from './dialogs/addpurchase/addpurchase.componen
 import { ViewaddpurchaseComponent } from './dialogs/viewaddpurchase/viewaddpurchase.component';
 import { BillOfMaterialsComponent } from './pages/bill-of-materials/bill-of-materials.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { VendorsComponent } from './dialogs/vendors/vendors.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { SettingsComponent } from './pages/settings/settings.component';
     AddpurchaseComponent,
     ViewaddpurchaseComponent,
     BillOfMaterialsComponent,
-    SettingsComponent
+    SettingsComponent,
+    VendorsComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
     AngularFireStorageModule,
     BrowserAnimationsModule,
     MatButtonModule, MatCheckboxModule,
-    MatToolbarModule, MatMenuModule, MatIconModule, MatCardModule, MatDialogModule, MatDividerModule, MatProgressBarModule,
+    MatToolbarModule, MatMenuModule, MatIconModule, MatCardModule, MatDialogModule, MatDividerModule, MatProgressBarModule, MatTabsModule,
     ReactiveFormsModule, MatFormFieldModule,
     FormsModule,
   ],
@@ -57,6 +60,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
       ViewProductsComponent,
       AddpurchaseComponent,
       ViewaddpurchaseComponent,
+      VendorsComponent,
     ]
   ,
   providers: [{ provide: FirestoreSettingsToken, useValue: {} }],

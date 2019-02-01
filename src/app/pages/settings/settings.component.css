@@ -4,6 +4,7 @@
 }
 .mainrow {
   align-content: center;
+  text-align: center;
 }
 .textTitle{
   position: relative;
@@ -11,6 +12,6 @@
   border-radius: 5px;
 }
 .item-grid {
-  max-width: 400px;
+  max-width: 450px;
   margin-left: 20px;
 }
