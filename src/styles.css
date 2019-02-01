@@ -5,3 +5,7 @@
 * {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'phetsarath-ot';
 }
+.icon-header {
+  position: absolute;
+  top: 19px;
+}

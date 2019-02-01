@@ -4,12 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProductsComponent } from './pages/products/products.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { PurchasesComponent } from './pages/purchases/purchases.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'purchases', component: PurchasesComponent },
-  { path: 'billOfMaterial', component: BillOfMaterialsComponent }
+  { path: 'billOfMaterial', component: BillOfMaterialsComponent },
+  { path: 'settings', component: SettingsComponent },
 ];
 
 @NgModule({
