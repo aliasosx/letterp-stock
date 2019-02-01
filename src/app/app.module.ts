@@ -7,8 +7,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule, FirestoreSettingsToken } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+
 import {
-  MatButtonModule, MatCheckboxModule, MatToolbarModule, MatMenuModule, MatIconModule, MatCardModule, MatDialogModule, MatDividerModule,
+  MatButtonModule, MatCheckboxModule, MatToolbarModule, MatMenuModule, MatIconModule, MatCardModule, MatDialogModule, MatDividerModule, MatProgressBarModule,
   MatFormFieldModule
 } from '@angular/material';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
@@ -40,9 +42,10 @@ import { BillOfMaterialsComponent } from './pages/bill-of-materials/bill-of-mate
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
+    AngularFireStorageModule,
     BrowserAnimationsModule,
     MatButtonModule, MatCheckboxModule,
-    MatToolbarModule, MatMenuModule, MatIconModule, MatCardModule, MatDialogModule, MatDividerModule,
+    MatToolbarModule, MatMenuModule, MatIconModule, MatCardModule, MatDialogModule, MatDividerModule, MatProgressBarModule,
     ReactiveFormsModule, MatFormFieldModule,
     FormsModule,
   ],

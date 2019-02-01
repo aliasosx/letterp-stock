@@ -5,6 +5,6 @@ export interface StockHistory {
   currentQuantity: number;
   updateDate: Date;
   updateSource: string; // Sale module Or Purchase
-  purchaseDetailId: string;
+  purchaseDetail: object;
   createdAt: Date;
 }

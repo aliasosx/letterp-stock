@@ -58,7 +58,7 @@ export class ProductsComponent implements OnInit {
     }).then((res) => {
       if (res) {
         this.db.collection('products').doc(product.id).delete();
-        swal('Products has been deleted', 'Product', 'success');
+        //swal('Products has been deleted', 'Product', 'success');
       } else {
         swal("Delete canceled");
       }
