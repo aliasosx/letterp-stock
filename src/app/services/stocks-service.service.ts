@@ -6,19 +6,15 @@ import { Product } from '../interfaces/product';
   providedIn: 'root'
 })
 export class StocksServiceService {
-
   constructor(private db: AngularFirestore) { }
-
   productsRef: AngularFirestoreCollection<Product>;
   productsDoc: AngularFirestoreDocument<Product>;
   CurrentQuantity: number;
-
   getLatestQuantityByProductName(productName): Promise<Product> {
     return new Promise((resolve, reject) => {
       return this.db.collection('products', ref => {
         return ref.where('productName', '==', productName);
       });
     });
-
   }
 }

@@ -76,9 +76,7 @@ export class AddpurchaseComponent implements OnInit {
               this.updateStock(product.data(), res);
             });
           });
-
         } else {
-          //swal('something went wrong!', 'Please correct data info', 'error');
           return
         }
       });
