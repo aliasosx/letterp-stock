@@ -31,6 +31,8 @@ export class AddFoodComponent implements OnInit {
   foodsRef: AngularFirestoreCollection<Food>;
   foodsDoc: AngularFirestoreDocument<Food>;
 
+  saveDisabled = false;
+
   ngOnInit() {
     this.addFoodForm = new FormGroup({
       'foodId': new FormControl(),
@@ -68,6 +70,7 @@ export class AddFoodComponent implements OnInit {
   createFood() {
     this.addFoodForm.get('photo').setValue(this.photoSrc);
     if (this.addFoodForm.valid) {
+      this.saveDisabled = true;
       this.showAlert = "hidden";
       this.foodsRef.add(this.addFoodForm.value).then((resp) => {
         this.dialogRef.close('success');

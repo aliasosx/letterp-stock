@@ -8,7 +8,6 @@ import { Vendor } from 'src/app/interfaces/vendor';
 import { Product } from 'src/app/interfaces/product';
 import { StockHistory } from 'src/app/interfaces/stockHistory';
 import { StocksServiceService } from 'src/app/services/stocks-service.service';
-import { FirebaseStorage } from 'angularfire2';
 import { AngularFireStorage } from 'angularfire2/storage';
 declare var swal: any;
 
@@ -24,6 +23,7 @@ export class AddpurchaseComponent implements OnInit {
     this.productsRef = db.collection<Product>('products');
     this.stockHistoriesRef = db.collection<StockHistory>('stockHistories');
   }
+  saveDisabled = false;
   addFormPurchase: FormGroup;
   purchasesRef: AngularFirestoreCollection<Purchase>;
   purchasesDoc: AngularFirestoreDocument<Purchase>;
@@ -66,6 +66,7 @@ export class AddpurchaseComponent implements OnInit {
   addPurchase() {
     if (this.addFormPurchase.valid) {
       this.addFormPurchase.get('userName').setValue('Administrator');
+      this.saveDisabled = true;
       this.purchasesRef.add(this.addFormPurchase.value).then(res => {
         if (res) {
           this.productForUpdateCollect = this.db.collection('products', ref => {
@@ -102,7 +103,7 @@ export class AddpurchaseComponent implements OnInit {
       });
       uploadTask.then((snapshot: firebase.storage.UploadTaskSnapshot) => {
         snapshot.ref.getDownloadURL().then(url => {
-          console.log(url); // Image url
+          this.addFormPurchase.get('bills').setValue(url); // Image url
         })
       });
     }

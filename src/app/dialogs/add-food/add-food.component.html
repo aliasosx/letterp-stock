@@ -41,11 +41,8 @@
         </div>
       </div>
       <div class="row">
-        <div class="col col-md-6">
-          <button mat-raised-button color="primary" (click)="createFood()" style="width: 100%;">Save</button>
-        </div>
-        <div class="col col-md-6">
-          <button mat-raised-button color="warn" style="width: 100%;">Cancel</button>
+        <div class="col col-md-12">
+          <button mat-raised-button color="primary" (click)="createFood()" [disabled]="saveDisabled" style="width: 100%;">Save</button>
         </div>
       </div>
 

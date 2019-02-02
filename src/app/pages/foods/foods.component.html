@@ -29,11 +29,18 @@
           <td class="text-center">{{ food.foodId }}</td>
           <td class="text-left">{{ food.food_name }}</td>
           <td class="text-left">{{ food.food_name_en }}</td>
-          <td class="text-center">{{ food.cost |number }}</td>
-          <td class="text-center">{{ food.price |number }}</td>
-          <td class="text-center">{{ food.currency }}</td>
-          <td class="text-center"><button mat-raised-button (click)="deleteFood(food.id)" color="warn">Delete</button><span
-              class="spaceDiv"></span><button mat-raised-button disabled color="primary">Update</button>
+          <td class="text-center" style="width: 100px;">{{ food.cost |number }}</td>
+          <td class="text-center" style="width: 100px;">{{ food.price |number }}</td>
+          <td class="text-center" style="width: 80px;">{{ food.currency }}</td>
+          <td class="text-center" style="width: 200px;">
+            <div class="row">
+              <div class="col col-md-6">
+                <button mat-raised-button (click)="deleteFood(food.id)" color="warn" style="width: 100%;margin: 0;">Delete</button>
+              </div>
+              <div class="col col-md-6">
+                <button mat-raised-button disabled color="primary" style="width: 100%;margin: 0;">Update</button>
+              </div>
+            </div>
           </td>
         </tr>
       </tbody>

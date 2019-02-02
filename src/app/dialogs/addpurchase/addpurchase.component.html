@@ -59,6 +59,6 @@
     </div>
   </div>
   <div class="text-center">
-    <button mat-raised-button color="primary" style="width: 100%;" (click)="addPurchase()">Save</button>
+    <button mat-raised-button color="primary" [disabled]="saveDisabled" style="width: 100%;" (click)="addPurchase()">Save</button>
   </div>
 </form>

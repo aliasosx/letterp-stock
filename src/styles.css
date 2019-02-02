@@ -3,7 +3,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 * {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'phetsarath-ot';
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'phetsarath-ot', 'Open Sans Condensed';
 }
 .icon-header {
   position: absolute;
