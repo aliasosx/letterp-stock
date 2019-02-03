@@ -68,13 +68,14 @@ export class AddpurchaseComponent implements OnInit {
       this.addFormPurchase.get('userName').setValue('Administrator');
       this.saveDisabled = true;
       this.purchasesRef.add(this.addFormPurchase.value).then(res => {
+        console.log(res);
         if (res) {
           this.productForUpdateCollect = this.db.collection('products', ref => {
             return ref.where('productName', '==', this.addFormPurchase.get('productName').value);
           });
           this.productForUpdateCollect.get().subscribe(products => {
             products.docs.forEach(product => {
-              this.updateStock(product.data(), res);
+              this.updateStock(product.data(), res, product.id);
             });
           });
         } else {
@@ -104,7 +105,9 @@ export class AddpurchaseComponent implements OnInit {
       uploadTask.then((snapshot: firebase.storage.UploadTaskSnapshot) => {
         snapshot.ref.getDownloadURL().then(url => {
           this.addFormPurchase.get('bills').setValue(url); // Image url
-        })
+        }).catch((err) => {
+          alert(err);
+        });
       });
     }
   }
@@ -112,21 +115,12 @@ export class AddpurchaseComponent implements OnInit {
   productNotesCollect: AngularFirestoreCollection<Product>;
 
   async testQuery() {
-    /*
-    this.productNotesCollect = this.db.collection('products', ref => {
-      return ref.where('cost', '>=', 10000);
-    });
-    this.productNotesCollect.get().subscribe(p => {
-      p.docs.forEach(o => {
-        this.updateStock(o.data(), '1111111');
-      });
-    });
-    */
     const c = await this.stockService.getLatestQuantityByProductName(this.addFormPurchase.get('productName')).then(resp => {
       console.log(resp);
     });
   }
-  updateStock(product, purchase) {
+  updateStock(product, purchase, id) {
+    console.log('Stock hist update');
     console.log(product);
     const stockhist = {
       productName: product.productName,
@@ -139,14 +133,18 @@ export class AddpurchaseComponent implements OnInit {
       createdAt: new Date(),
     }
     this.db.collection('stockHistories').add(stockhist).then((resp) => {
-      //console.log(resp.id);
-      this.updateCurrentStock(product, stockhist.currentQuantity);
+      console.log(resp);
+      this.updateCurrentStock(product, stockhist.currentQuantity, id);
+    }).catch((err) => {
+      console.log(err);
     });
   }
-  updateCurrentStock(product, CurrentQuantity) {
+  updateCurrentStock(product, CurrentQuantity, id) {
+    console.log('Stock product update');
     const _product: Product = product;
+    console.log(product);
     _product.currentQuantity = CurrentQuantity;
-    this.db.collection('products').doc(product.id).update(_product).then((resp) => {
+    this.db.collection('products').doc(id).update(_product).then((resp) => {
       this.DialogRef.close('success');
     });
   }

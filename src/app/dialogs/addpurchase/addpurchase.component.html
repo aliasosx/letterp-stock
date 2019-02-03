@@ -50,8 +50,9 @@
     </div>
     <div class="form-group col-md-6">
       <label for="bills">Bills</label>
-      <input type="file" class="form-control" id="bills" placeholder="Bills" formControlName="bills" #fileupload
-        (change)="uploadBills($event.target.files)">
+      <button mat-raised-button color="primary" class="form-control" (click)="fileupload.click()" id="bills">Upload
+        Bill</button>
+      <input type="file" class="form-control" style="display:none" placeholder="Bills" #fileupload (change)="uploadBills($event.target.files)">
     </div>
     <div class="form-group col-md-12">
       <mat-progress-bar color="primary" mode="determinate" [value]="progressBarValue">

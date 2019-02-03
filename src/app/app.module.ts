@@ -29,6 +29,7 @@ import { VendorsComponent } from './dialogs/vendors/vendors.component';
 import { FoodsComponent } from './pages/foods/foods.component';
 import { AddFoodComponent } from './dialogs/add-food/add-food.component';
 import { StockHistoryComponent } from './pages/stock-history/stock-history.component';
+import { TransactionsComponent } from './pages/transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { StockHistoryComponent } from './pages/stock-history/stock-history.compo
     VendorsComponent,
     FoodsComponent,
     AddFoodComponent,
-    StockHistoryComponent
+    StockHistoryComponent,
+    TransactionsComponent
   ],
   imports: [
     BrowserModule,

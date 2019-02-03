@@ -11,5 +11,4 @@ export class StockHistoryComponent implements OnInit {
   title = 'Stock tracking';
   ngOnInit() {
   }
-
 }

@@ -20,6 +20,14 @@
     </div>
 
     <div class="form-group col-md-6">
+      <label for="foodId">Food Name</label>
+      <select class="form-control" id="foodId" formControlName="foodId">
+        <option disabled value="-1">------</option>
+        <option value="{{ food.foodId }}" *ngFor="let food of foods | async">{{ food.food_name }}</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6">
       <label for="productTypeCode">Product Types</label>
       <select class="form-control" formControlName="productTypeCode" required>
         <option value="-1" disabled>------</option>

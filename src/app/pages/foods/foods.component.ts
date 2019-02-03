@@ -38,17 +38,16 @@ export class FoodsComponent implements OnInit {
   }
   deleteFood(id) {
     swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this imaginary file!",
+      title: "ທ່ານຕ້ອງການລຶບແທ້ບໍ?",
+      text: "ຫຼັງຈາກລືບລາຍການແລ້ວບໍ່ສາມາທີ່ຈະຈກູ້ຄືນໄດ້",
       icon: "warning",
       buttons: true,
       dangerMode: true,
     }).then((res) => {
       if (res) {
         this.foodsRef.doc(id).delete();
-        //swal('Products has been deleted', 'Product', 'success');
       } else {
-        swal("Delete canceled");
+        return;
       }
     });
 

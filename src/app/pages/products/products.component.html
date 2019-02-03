@@ -20,6 +20,7 @@
           <th scope="col" class="text-center" style="width: 30px;">ລະຫັດ</th>
           <th scope="col" class="text-left">ລະຫັດບາໂຄດ</th>
           <th scope="col" class="text-center">ລະຫັດສິນຄ້າ</th>
+          <th scope="col" class="text-center">ລະຫັດອາຫານ</th>
           <th scope="col" class="text-center">ຊື່ສິນຄ້າ</th>
           <th scope="col" class="text-center">ປະເພດ</th>
           <th scope="col" class="text-center">ຕົ້ນທຶນ</th>
@@ -32,10 +33,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products | async">
+        <tr *ngFor="let product of products | async" [ngClass]="{'bg-warning': product.currentQuantity == 0}">
           <td class="text-left" (click)="updateProduct(product)" style="cursor: pointer">{{ product.id.trim() }}</td>
           <td class="text-left">{{ product.barcode }}</td>
           <td class="text-left">{{ product.productCode }}</td>
+          <td class="text-center">{{ product.foodId }}</td>
           <td class="text-left">{{ product.productName }}</td>
           <td class="text-left">{{ product.productTypeCode }}</td>
           <td class="text-right">{{ product.cost |number }}</td>

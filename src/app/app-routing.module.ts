@@ -7,6 +7,7 @@ import { PurchasesComponent } from './pages/purchases/purchases.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { FoodsComponent } from './pages/foods/foods.component';
 import { StockHistoryComponent } from './pages/stock-history/stock-history.component';
+import { TransactionsComponent } from './pages/transactions/transactions.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'billOfMaterial', component: BillOfMaterialsComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'foods', component: FoodsComponent },
-  { path: 'stocktracking', component: StockHistoryComponent }
+  { path: 'stocktracking', component: StockHistoryComponent },
+  { path: 'transactions', component: TransactionsComponent }
 ];
 
 @NgModule({
