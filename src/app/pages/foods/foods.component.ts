@@ -22,7 +22,9 @@ export class FoodsComponent implements OnInit {
   foods: Observable<any[]>;
 
   ngOnInit() {
-    this.foods = this.db.collection('foods').snapshotChanges().pipe(map(changes => {
+    this.foods = this.db.collection('foods', ref => {
+      return ref.orderBy('foodId', 'asc');
+    }).snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Food;
         data['id'] = a.payload.doc.id;
