@@ -5,6 +5,7 @@ import { Food } from 'src/app/interfaces/food';
 import { Observable } from 'rxjs';
 import { AddFoodComponent } from 'src/app/dialogs/add-food/add-food.component';
 import { map } from 'rxjs/operators';
+declare var swal: any;
 
 @Component({
   selector: 'app-foods',
@@ -36,6 +37,20 @@ export class FoodsComponent implements OnInit {
     const dialogRef = this.dialog.open(AddFoodComponent, { width: '800px' });
   }
   deleteFood(id) {
-    this.foodsRef.doc(id).delete();
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((res) => {
+      if (res) {
+        this.foodsRef.doc(id).delete();
+        //swal('Products has been deleted', 'Product', 'success');
+      } else {
+        swal("Delete canceled");
+      }
+    });
+
   }
 }
