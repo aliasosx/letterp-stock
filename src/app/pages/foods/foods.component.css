@@ -7,3 +7,6 @@
 .product_detail {
   margin-top: 10px;
 }
+.foodPhoto {
+  max-width: 50px;
+}

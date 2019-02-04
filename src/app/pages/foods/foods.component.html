@@ -15,24 +15,28 @@
     <table class="table table-bordered product_detail">
       <thead class="thead-light">
         <tr>
-          <th scope="col" class="text-center" style="width: 30px;">ລະຫັດ</th>
+          <th scope="col" class="text-center " style="width: 30px;">ລະຫັດ</th>
+          <th scope="col" class="text-center">ຮູບ</th>
           <th scope="col" class="text-left">ຊື່ອາຫານ</th>
           <th scope="col" class="text-center">ຊື່ອາຫານພາສາອັງກິດ</th>
           <th scope="col" class="text-center">ຕົ້ນທຶນ</th>
           <th scope="col" class="text-center">ລາຄາຂາຍ</th>
           <th scope="col" class="text-center">ສະກຸນເງິນ</th>
+          <th scope="col" class="text-center">ຄົວ</th>
           <th scope="col" class="text-center">ຈັດການ</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let food of foods | async">
-          <td class="text-center">{{ food.foodId }}</td>
-          <td class="text-left">{{ food.food_name }}</td>
-          <td class="text-left">{{ food.food_name_en }}</td>
-          <td class="text-center" style="width: 100px;">{{ food.cost |number }}</td>
-          <td class="text-center" style="width: 100px;">{{ food.price |number }}</td>
-          <td class="text-center" style="width: 90px;">{{ food.currency }}</td>
-          <td class="text-center" style="width: 200px;">
+          <td class="text-center align-middle">{{ food.foodId }}</td>
+          <td class="text-center align-middle"><img src="{{ food.photo }}" class="foodPhoto"></td>
+          <td class="text-left align-middle">{{ food.food_name }}</td>
+          <td class="text-left align-middle">{{ food.food_name_en }}</td>
+          <td class="text-center align-middle" style="width: 100px;">{{ food.cost |number }}</td>
+          <td class="text-center align-middle" style="width: 100px;">{{ food.price |number }}</td>
+          <td class="text-center align-middle" style="width: 90px;">{{ food.currency }}</td>
+          <td class="text-center align-middle" style="width: 90px;">{{ food.kitchenName }}</td>
+          <td class="text-center align-middle" style="width: 200px;">
             <div class="row">
               <div class="col col-md-6">
                 <button mat-raised-button (click)="deleteFood(food.id)" color="warn" style="width: 100%;margin: 0;">Delete</button>
