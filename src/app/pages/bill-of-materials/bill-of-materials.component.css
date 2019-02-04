@@ -1,3 +1,7 @@
 .mainCard {
   margin-top: 10px;
 }
+.btnAddNewDiv {
+  position: absolute;
+  right: 10px;
+}

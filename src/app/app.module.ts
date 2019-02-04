@@ -30,6 +30,7 @@ import { FoodsComponent } from './pages/foods/foods.component';
 import { AddFoodComponent } from './dialogs/add-food/add-food.component';
 import { StockHistoryComponent } from './pages/stock-history/stock-history.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
+import { AddBomComponent } from './dialogs/add-bom/add-bom.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { TransactionsComponent } from './pages/transactions/transactions.compone
     FoodsComponent,
     AddFoodComponent,
     StockHistoryComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    AddBomComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +72,7 @@ import { TransactionsComponent } from './pages/transactions/transactions.compone
       ViewaddpurchaseComponent,
       VendorsComponent,
       AddFoodComponent,
+      AddBomComponent,
     ]
   ,
   providers: [{ provide: FirestoreSettingsToken, useValue: {} }],

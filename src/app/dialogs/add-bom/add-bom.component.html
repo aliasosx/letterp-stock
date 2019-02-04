@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>ສ່ວນປະກອບ ອາຫານ ແລະ ເຄື່ອງດື່ມ</h1>
+<form [formGroup]="addNewBOMForm">
+  <mat-card>
+    <h4 mat-dialog-title>ອາຫານ</h4>
+    <mat-card-content>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <select class="form-control" id="food">
+            <option disabled value="">-----</option>
+            <option value="{{ food.food_name }}" *ngFor="let food of foods | async">{{ food.food_name }}</option>
+          </select>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <h4 mat-dialog-title>ສ່ວນປະກອບ</h4>
+    <mat-card-content>
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <th>ສິນຄ້າ</th>
+          <th>ຈຳນວນ</th>
+          <th>ໝາຍເຫດ</th>
+          <th>ເພີ່ມ</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-center" style="width: 30px;">
+              <button mat-mini-fab color="primary">
+                <i class="material-icons">
+                  add
+                </i>
+              </button></td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</form>

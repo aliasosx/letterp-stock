@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { AddBomComponent } from 'src/app/dialogs/add-bom/add-bom.component';
 
 @Component({
   selector: 'app-bill-of-materials',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BillOfMaterialsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
   title: string = 'Bill Of Material'
   ngOnInit() {
   }
-
+  addNewBom() {
+    const dialogRef = this.dialog.open(AddBomComponent, {
+      width: '800px'
+    });
+  }
 }
