@@ -35,6 +35,7 @@ export class ViewaddpurchaseComponent implements OnInit {
   addFormPurchase: FormGroup;
   ngOnInit() {
     this.addFormPurchase = new FormGroup({
+      id: new FormControl(),
       billNo: new FormControl(),
       productName: new FormControl(),
       quantity: new FormControl(0),
@@ -44,7 +45,9 @@ export class ViewaddpurchaseComponent implements OnInit {
       vendor: new FormControl(),
       userName: new FormControl(),
       noted: new FormControl(),
+      bills: new FormControl(),
     });
+    //console.log(this.data);
     this.vendors = this.db.collection('vendors').valueChanges();
     this.products = this.db.collection('products').valueChanges();
     this.addFormPurchase.setValue(this.data);

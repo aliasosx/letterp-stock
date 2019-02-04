@@ -21,6 +21,7 @@
           <th scope="col" class="text-center">ເລກຄິວ</th>
           <th scope="col" class="text-center">ຈ່າຍຜ່ານ</th>
           <th scope="col" class="text-center">Refno</th>
+          <th scope="col" class="text-center">CR/DR</th>
           <th scope="col" class="text-center">ຈັດການ</th>
         </tr>
       </thead>
@@ -43,6 +44,7 @@
             <td class="text-center">{{ transaction.payment.method + ' By ' + transaction.payment.acquirer }}</td>
           </ng-template>
           <td class="text-center">{{ transaction.payment.refno }}</td>
+          <td class="text-center">{{ transaction.CRDR }}</td>
           <td class="text-center"><button mat-raised-button color="warn" (click)="deleteTransction(transaction.id)">Delete</button><span
               class="spaceDiv"></span><button mat-raised-button color="primary" disabled>Update</button></td>
         </tr>

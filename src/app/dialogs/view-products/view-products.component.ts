@@ -57,6 +57,7 @@ export class ViewProductsComponent implements OnInit {
       createdAt: new FormControl(new Date()),
       updatedAt: new FormControl(new Date()),
       unit: new FormControl(),
+      foodId: new FormControl(),
     });
 
 
