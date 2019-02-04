@@ -18,11 +18,28 @@ export class AddBomComponent implements OnInit {
   addNewBOMForm: FormGroup;
   foodsRef: AngularFirestoreCollection<Food>;
   foods: Observable<any[]>;
+  listOfProducts: any;
 
   ngOnInit() {
     this.addNewBOMForm = new FormGroup({
 
     });
     this.foods = this.foodsRef.valueChanges();
+  }
+  addProduct() {
+    if (this.listOfProducts) {
+      this.listOfProducts.push(
+        {
+          'product': 'Coke',
+          'quantity': 20
+        }
+      );
+    } else {
+      this.listOfProducts = [{
+        'product': 'Pepsi',
+        'quantity': 25
+      }];
+    }
+    console.log(this.listOfProducts);
   }
 }

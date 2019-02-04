@@ -15,25 +15,23 @@
   </mat-card>
   <mat-card>
     <h4 mat-dialog-title>ສ່ວນປະກອບ</h4>
+    <button mat-mini-fab color="primary" class="addBtn" (click)="addProduct()">
+      <i class="material-icons ">
+        add
+      </i>
+    </button>
     <mat-card-content>
       <table class="table table-bordered">
         <thead class="thead-light">
           <th>ສິນຄ້າ</th>
           <th>ຈຳນວນ</th>
           <th>ໝາຍເຫດ</th>
-          <th>ເພີ່ມ</th>
         </thead>
         <tbody>
-          <tr>
+          <tr *ngFor="let product of listOfProducts">
+            <td>{{ product.product }}</td>
+            <td>{{ product.quantity }}</td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td class="text-center" style="width: 30px;">
-              <button mat-mini-fab color="primary">
-                <i class="material-icons">
-                  add
-                </i>
-              </button></td>
           </tr>
         </tbody>
       </table>
