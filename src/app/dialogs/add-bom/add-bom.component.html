@@ -5,7 +5,7 @@
     <mat-card-content>
       <div class="form-row">
         <div class="form-group col-md-12">
-          <select class="form-control" id="food">
+          <select class="form-control" id="food" formControlName="food" (change)="foodSelect($event.target.value)">
             <option disabled value="">-----</option>
             <option value="{{ food.food_name }}" *ngFor="let food of foods | async">{{ food.food_name }}</option>
           </select>
@@ -13,28 +13,47 @@
       </div>
     </mat-card-content>
   </mat-card>
-  <mat-card>
+  <mat-card [ngClass]="showContent">
     <h4 mat-dialog-title>ສ່ວນປະກອບ</h4>
-    <button mat-mini-fab color="primary" class="addBtn" (click)="addProduct()">
-      <i class="material-icons ">
-        add
-      </i>
-    </button>
     <mat-card-content>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="product">ສິນຄ້າ</label>
+          <select class="form-control" id="product" #productSelect formControlName="product">
+            <option disabled value=""></option>
+            <option value="{{ product.productName }}" *ngFor="let product of products | async">{{ product.productName
+              }}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="txtQuantity">ຈຳນວນ</label>
+          <input type="number" id="txtQuantity" #quantityTxt class="form-control" formControlName="quantity">
+        </div>
+        <div class="form-group col-md-2">
+          <button mat-raised-button color="primary" class="addBtn" (click)="addProduct(quantityTxt.value)">Add</button>
+        </div>
+      </div>
       <table class="table table-bordered">
         <thead class="thead-light">
           <th>ສິນຄ້າ</th>
           <th>ຈຳນວນ</th>
-          <th>ໝາຍເຫດ</th>
+          <th>ຫົວໜ່ວຍ</th>
         </thead>
         <tbody>
           <tr *ngFor="let product of listOfProducts">
             <td>{{ product.product }}</td>
             <td>{{ product.quantity }}</td>
-            <td></td>
+            <td>{{ product.unit }}</td>
           </tr>
         </tbody>
       </table>
     </mat-card-content>
+    <mat-card-actions>
+      <div class="row">
+        <div class="col col-md-12 text-center">
+          <button mat-raised-button color="primary" style="width: 100%;">Save</button>
+        </div>
+      </div>
+    </mat-card-actions>
   </mat-card>
 </form>
