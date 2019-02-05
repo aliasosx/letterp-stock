@@ -5,6 +5,7 @@ import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/fires
 import { Food } from 'src/app/interfaces/food';
 import { Observable } from 'rxjs';
 import { Bom } from 'src/app/interfaces/bom';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-add-bom',
@@ -13,13 +14,13 @@ import { Bom } from 'src/app/interfaces/bom';
 })
 export class AddBomComponent implements OnInit {
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private dialogRef: MatDialogRef<AddBomComponent>) {
     this.foodsRef = db.collection<Food>('foods');
     this.productsRef = db.collection<Product>('products', ref => {
       return ref.where('productTypeCode', '==', 'MATERIAL');
     });
   }
-
+  saveDisabled = false;
   addNewBOMForm: FormGroup;
   foodsRef: AngularFirestoreCollection<Food>;
   foods: Observable<any[]>;
@@ -47,7 +48,7 @@ export class AddBomComponent implements OnInit {
       return ref.where('productName', '==', this.addNewBOMForm.get('product').value);
     }).get().subscribe(p => {
       p.docs.forEach(product => {
-        //console.log(this.costTotal);
+        this.costTotal += product.data().cost * this.addNewBOMForm.get('quantity').value;
         this.listOfProducts.push(
           {
             'product': this.addNewBOMForm.get('product').value,
@@ -58,15 +59,6 @@ export class AddBomComponent implements OnInit {
         );
       });
     });
-
-    this.bom = {
-      'food': this.addNewBOMForm.get('food').value,
-      'products': this.listOfProducts,
-      'cost': this.costTotal,
-      'createdAt': new Date(),
-      'updatedAt': new Date()
-    }
-    console.log(this.bom);
   }
   selectedProduct(e) {
     this.productSelected = e;
@@ -78,11 +70,22 @@ export class AddBomComponent implements OnInit {
       this.showContent = "hidden";
     }
   }
-  addNewBom() {
-    this.db.collection<Bom>('BillOfMaterials').add(this.bom).then((res) => {
-      alert(res);
+  async addNewBom() {
+    this.saveDisabled = true;
+    this.bom = {
+      'food': this.addNewBOMForm.get('food').value,
+      'products': this.listOfProducts,
+      'cost': this.costTotal,
+      'createdAt': new Date(),
+      'updatedAt': new Date()
+    }
+
+    const c = await this.db.collection<Bom>('BillOfMaterials').add(this.bom).then((res) => {
+      this.dialogRef.close('success');
     }).catch((err) => {
+      this.saveDisabled = false;
       alert(err);
+      return;
     });
   }
 }
