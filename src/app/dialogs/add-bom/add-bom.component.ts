@@ -4,6 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Food } from 'src/app/interfaces/food';
 import { Observable } from 'rxjs';
+import { Bom } from 'src/app/interfaces/bom';
 
 @Component({
   selector: 'app-add-bom',
@@ -28,12 +29,15 @@ export class AddBomComponent implements OnInit {
   products: Observable<any[]>;
   showContent = "hidden";
   productSelected: any;
-
+  bom: any;
+  costTotal: number = 0;
   ngOnInit() {
     this.addNewBOMForm = new FormGroup({
       food: new FormControl(),
       product: new FormControl(),
-      quantity: new FormControl()
+      quantity: new FormControl(),
+      unit: new FormControl(),
+      note: new FormControl(),
     });
     this.foods = this.foodsRef.valueChanges();
     this.products = this.productsRef.valueChanges();
@@ -43,21 +47,26 @@ export class AddBomComponent implements OnInit {
       return ref.where('productName', '==', this.addNewBOMForm.get('product').value);
     }).get().subscribe(p => {
       p.docs.forEach(product => {
+        //console.log(this.costTotal);
         this.listOfProducts.push(
           {
             'product': this.addNewBOMForm.get('product').value,
             'quantity': this.addNewBOMForm.get('quantity').value,
-            'unit': product.data().unit
+            'unit': product.data().unit,
+            'cost': product.data().cost * this.addNewBOMForm.get('quantity').value
           }
         );
       });
     });
 
-    let bom = {
+    this.bom = {
       'food': this.addNewBOMForm.get('food').value,
-      'products': this.listOfProducts
+      'products': this.listOfProducts,
+      'cost': this.costTotal,
+      'createdAt': new Date(),
+      'updatedAt': new Date()
     }
-    console.log(bom);
+    console.log(this.bom);
   }
   selectedProduct(e) {
     this.productSelected = e;
@@ -68,5 +77,12 @@ export class AddBomComponent implements OnInit {
     } else {
       this.showContent = "hidden";
     }
+  }
+  addNewBom() {
+    this.db.collection<Bom>('BillOfMaterials').add(this.bom).then((res) => {
+      alert(res);
+    }).catch((err) => {
+      alert(err);
+    });
   }
 }

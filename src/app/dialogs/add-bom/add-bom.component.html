@@ -35,15 +35,17 @@
       </div>
       <table class="table table-bordered">
         <thead class="thead-light">
-          <th>ສິນຄ້າ</th>
-          <th>ຈຳນວນ</th>
-          <th>ຫົວໜ່ວຍ</th>
+          <th class="text-center">ສິນຄ້າ</th>
+          <th class="text-center">ຈຳນວນ</th>
+          <th class="text-center">ທຶນ</th>
+          <th class="text-center">ຫົວໜ່ວຍ</th>
         </thead>
         <tbody>
           <tr *ngFor="let product of listOfProducts">
-            <td>{{ product.product }}</td>
-            <td>{{ product.quantity }}</td>
-            <td>{{ product.unit }}</td>
+            <td class="text-left">{{ product.product }}</td>
+            <td class="text-right">{{ product.quantity }}</td>
+            <td class="text-right">{{ product.cost }}</td>
+            <td class="text-center">{{ product.unit }}</td>
           </tr>
         </tbody>
       </table>
@@ -51,7 +53,7 @@
     <mat-card-actions>
       <div class="row">
         <div class="col col-md-12 text-center">
-          <button mat-raised-button color="primary" style="width: 100%;">Save</button>
+          <button mat-raised-button color="primary" style="width: 100%;" (click)="addNewBom()">Save</button>
         </div>
       </div>
     </mat-card-actions>

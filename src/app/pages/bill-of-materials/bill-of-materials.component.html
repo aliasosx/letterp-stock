@@ -11,5 +11,29 @@
     </div>
   </mat-card-header>
   <mat-card-content>
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" class="text-left">BOM id</th>
+          <th scope=" col" class="text-center">ລາຍການອາຫານ</th>
+          <th scope="col" class="text-center">ຕົ້ນທຶນ</th>
+          <th scope="col" class="text-center">ຈຳນວນ</th>
+          <th scope="col" class="text-center">ສ່ວນປະກອບ</th>
+          <th scope="col" class="text-center">ແກ້ໄຂ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bom of boms | async">
+          <td class="align-middle">{{ bom.id }}</td>
+          <td class="align-middle">{{ bom.food }}</td>
+          <td class="text-right align-middle"></td>
+          <td>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let product of bom.products">{{ product.quantity }}</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </mat-card-content>
 </mat-card>
